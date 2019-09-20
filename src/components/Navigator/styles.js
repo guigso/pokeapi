@@ -29,6 +29,7 @@ export const NavButton = styled.button`
     opacity: 0.9;
   }
 `;
+
 export const NavStatus = styled.div`
   width: 70%;
   height: 55px;
