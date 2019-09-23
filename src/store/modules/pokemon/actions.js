@@ -1,4 +1,4 @@
-export function getGenerationRequest(generation_number) {
+export function getGenerationRequest(generation_number = 1) {
   return {
     type: '@pokemon/GET_GENERATION_REQUEST',
     payload: { generation_number },
