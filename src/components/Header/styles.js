@@ -18,6 +18,12 @@ export const Content = styled.div`
     img {
       height: 50px;
     }
+
+    @media only screen and (max-width: 400px) {
+      img {
+        display: none;
+      }
+    }
   }
 
   aside {
