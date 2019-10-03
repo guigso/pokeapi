@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -24,10 +24,17 @@ export const NavButton = styled.button`
   &:not(:first-child) {
     transform: scaleX(-1);
   }
-
-  &:hover {
-    opacity: 0.9;
-  }
+  ${props =>
+    props.disabled
+      ? css`
+          cursor: default;
+        `
+      : css`
+          cursor: pointer;
+          &:hover {
+            opacity: 0.9;
+          }
+        `}
 `;
 
 export const NavStatus = styled.div`
