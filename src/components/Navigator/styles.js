@@ -28,6 +28,12 @@ export const NavButton = styled.button`
     props.disabled
       ? css`
           cursor: default;
+          background: linear-gradient(
+            180deg,
+            #b9b6b8 100%,
+            #dad8d9 99.99%,
+            #f8f8f8 -4.55%
+          );
         `
       : css`
           cursor: pointer;

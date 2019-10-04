@@ -11,7 +11,6 @@ export function* getGeneration({ payload }) {
     yield put(getGenerationSuccess({ ...response.data, generation_number }));
   } catch (err) {
     yield put(getGenerationFailure());
-    console.tron.log(err);
   }
 }
 
