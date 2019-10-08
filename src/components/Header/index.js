@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from 'assets/pokeapi.png';
 
 import Navigator from 'components/Navigator';
@@ -9,7 +10,9 @@ export default function Header() {
     <Container>
       <Content>
         <nav>
-          <img src={logo} alt="PokeApi" />
+          <Link to="/">
+            <img src={logo} alt="PokeApi" />
+          </Link>
         </nav>
         <aside>
           <Navigator />

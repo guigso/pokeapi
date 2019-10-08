@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Header from 'components/Header';
 
 import { getGenerationRequest } from 'store/modules/pokemon/actions';
-import { Wrapper, Content, ListContainer, ListItem } from './styles';
+import { Content, ListContainer, ListItem } from './styles';
 
 export default function Main({ history }) {
   const dispatch = useDispatch();
 
   const pokemons = useSelector(state => state.pokemon.pokemons);
+  const genNumber = useSelector(state => state.pokemon.generation_number);
 
   useEffect(() => {
     function loadFirstGeneration() {
-      dispatch(getGenerationRequest());
+      dispatch(getGenerationRequest(genNumber));
     }
     loadFirstGeneration();
-  }, [dispatch]);
+  }, [dispatch, genNumber]);
 
   const background = useSelector(state => state.pokemon.background);
 
