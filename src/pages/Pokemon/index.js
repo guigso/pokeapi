@@ -12,8 +12,9 @@ import {
   TypeTag,
   DetailsCard,
   EvolutionChain,
-  EvolutionLevel,
-  Evolution,
+  EvolutionRow,
+  EvolutionCard,
+  EvolutionTrigger,
   AnotherCard,
 } from './styles';
 
@@ -37,20 +38,50 @@ export default function Pokemon({ match, history }) {
       <TypeTag key={ele.slot}>{ele.type.name}</TypeTag>
     ));
   }
+
+  function getDetails(details) {
+    const keys = Object.keys(details);
+    return keys.map(e => {
+      if (e !== 'trigger' && e !== 'needs_overworld_rain') {
+        return (
+          <p>
+            {e.split('_').join(' ')}:{' '}
+            {details[e].name
+              ? details[e].name.split('-').join(' ')
+              : String(details[e])
+                  .split('-')
+                  .join(' ')}
+          </p>
+        );
+      }
+      return false;
+    });
+  }
+
   function getEvolutions() {
-    return pokemon.evo_chain.map(ele => (
-      <EvolutionLevel
-        key={ele.id}
-        onClick={() => history.push(`/infos/${ele.id}`)}
+    return pokemon.evo_chain.map((ele, index) => (
+      <EvolutionRow
+        key={ele.evolves_to.id + index}
+        onClick={() => history.push(`/infos/${ele.evolves_to.id}`)}
       >
-        {`name: ${ele.name} |`}
-        {`evo_chain_level: ${ele.evo_chain_level} |`}
-        {ele.details
-          ? `details:  ${
-              ele.details.min_level ? `Level up ${ele.details.min_level}` : ''
-            }`
-          : ''}
-      </EvolutionLevel>
+        <EvolutionCard>
+          <img src={ele.sprite} alt={ele.name} />
+          <p>
+            #{ele.id}-{ele.name}
+          </p>
+        </EvolutionCard>
+        <EvolutionTrigger>
+          <p>---------------></p>
+          <p>Trigger: {ele.evolves_to.details.trigger.split('-').join(' ')}</p>
+          {getDetails(ele.evolves_to.details)}
+        </EvolutionTrigger>
+        <EvolutionCard>
+          <img src={ele.evolves_to.sprite} alt={ele.evolves_to.name} />
+          <p>
+            #{ele.evolves_to.id}-{ele.evolves_to.name}
+          </p>
+        </EvolutionCard>
+      </EvolutionRow>
     ));
   }
 
