@@ -22,11 +22,12 @@ export const ListContainer = styled.ul`
     grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
   }
 `;
+
 export const ListItem = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   min-width: 100px;
   min-height: 110px;
   img {

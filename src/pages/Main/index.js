@@ -15,7 +15,8 @@ export default function Main({ history }) {
       dispatch(getGenerationRequest(genNumber));
     }
     loadFirstGeneration();
-  }, [dispatch, genNumber]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [genNumber]);
 
   const background = useSelector(state => state.pokemon.background);
 
@@ -28,8 +29,7 @@ export default function Main({ history }) {
             onClick={() => history.push(`/infos/${poke.id}`)}
           >
             <img src={poke.sprite} alt={poke.name} />
-            <strong>#{poke.id}</strong>
-            <strong>{poke.name}</strong>
+            <strong>{`#${poke.id} ${poke.name}`}</strong>
           </ListItem>
         ))}
       </ListContainer>

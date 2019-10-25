@@ -41,10 +41,10 @@ export default function Pokemon({ match, history }) {
 
   function getDetails(details) {
     const keys = Object.keys(details);
-    return keys.map(e => {
+    return keys.map((e, index) => {
       if (e !== 'trigger' && e !== 'needs_overworld_rain') {
         return (
-          <p>
+          <p key={index + details[e]}>
             {e.split('_').join(' ')}:{' '}
             {details[e].name
               ? details[e].name.split('-').join(' ')
@@ -61,7 +61,7 @@ export default function Pokemon({ match, history }) {
   function getEvolutions() {
     return pokemon.evo_chain.map((ele, index) => (
       <EvolutionRow
-        key={ele.evolves_to.id + index}
+        key={`${index} ${ele.evolves_to.id}`}
         onClick={() => history.push(`/infos/${ele.evolves_to.id}`)}
       >
         <EvolutionCard>
@@ -71,7 +71,7 @@ export default function Pokemon({ match, history }) {
           </p>
         </EvolutionCard>
         <EvolutionTrigger>
-          <p>---------------></p>
+          <p>--------------------------------------------></p>
           <p>Trigger: {ele.evolves_to.details.trigger.split('-').join(' ')}</p>
           {getDetails(ele.evolves_to.details)}
         </EvolutionTrigger>

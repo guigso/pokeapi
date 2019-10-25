@@ -85,19 +85,23 @@ export const EvolutionChain = styled.div`
   padding: 15px;
   border-radius: 15px;
   overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
 `;
 export const EvolutionRow = styled.div`
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 4px;
   border: 1px solid black;
   cursor: pointer;
   margin-bottom: 5px;
 `;
 
-export const EvolutionCard = styled.div``
-export const EvolutionTrigger = styled.div``
+export const EvolutionCard = styled.div``;
+export const EvolutionTrigger = styled.div``;
 export const AnotherCard = styled.div`
   background: #fff;
   height: 128px;
