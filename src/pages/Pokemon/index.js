@@ -5,9 +5,10 @@ import { getPokemonRequest } from 'store/modules/pokemon/actions';
 import {
   Container,
   CardsWrapper,
-  ProfileCard,
+  MainCard,
   PokemonImageWrapper,
-  Tags,
+  TextTags,
+  TypeTags,
   NumberTag,
   TypeTag,
   DetailsCard,
@@ -16,6 +17,7 @@ import {
   EvolutionCard,
   EvolutionTrigger,
   AnotherCard,
+  NameTag,
 } from './styles';
 
 export default function Pokemon({ match, history }) {
@@ -60,11 +62,8 @@ export default function Pokemon({ match, history }) {
 
   function getEvolutions() {
     return pokemon.evo_chain.map((ele, index) => (
-      <EvolutionRow
-        key={`${index} ${ele.evolves_to.id}`}
-        onClick={() => history.push(`/infos/${ele.evolves_to.id}`)}
-      >
-        <EvolutionCard>
+      <EvolutionRow key={`${index} ${ele.evolves_to.id}`}>
+        <EvolutionCard onClick={() => history.push(`/infos/${ele.id}`)}>
           <img src={ele.sprite} alt={ele.name} />
           <p>
             #{ele.id}-{ele.name}
@@ -75,10 +74,12 @@ export default function Pokemon({ match, history }) {
           <p>Trigger: {ele.evolves_to.details.trigger.split('-').join(' ')}</p>
           {getDetails(ele.evolves_to.details)}
         </EvolutionTrigger>
-        <EvolutionCard>
+        <EvolutionCard
+          onClick={() => history.push(`/infos/${ele.evolves_to.id}`)}
+        >
           <img src={ele.evolves_to.sprite} alt={ele.evolves_to.name} />
           <p>
-            #{ele.evolves_to.id}-{ele.evolves_to.name}
+            #{ele.evolves_to.id} - {ele.evolves_to.name}
           </p>
         </EvolutionCard>
       </EvolutionRow>
@@ -89,18 +90,18 @@ export default function Pokemon({ match, history }) {
     <Container>
       {!loading && pokemon ? (
         <CardsWrapper>
-          <ProfileCard>
+          <MainCard>
+            <TextTags>
+              <NumberTag>#{pokemon_id}</NumberTag>
+              <NameTag>{pokemon.name}</NameTag>
+            </TextTags>
             <PokemonImageWrapper>
               <img src={pokemon.sprite} alt={pokemon.name} />
             </PokemonImageWrapper>
-            <Tags>
-              <NumberTag>#{pokemon_id}</NumberTag>
-              {getTypes()}
-            </Tags>
-          </ProfileCard>
+            <TypeTags>{getTypes()}</TypeTags>
+          </MainCard>
           <DetailsCard>
             <EvolutionChain>{getEvolutions()}</EvolutionChain>
-            <AnotherCard>Another card </AnotherCard>
           </DetailsCard>
         </CardsWrapper>
       ) : (
