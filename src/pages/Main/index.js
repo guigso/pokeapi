@@ -16,7 +16,7 @@ export default function Main({ history }) {
     }
     loadFirstGeneration();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [genNumber]);
+  }, []);
 
   const background = useSelector(state => state.pokemon.background);
 
